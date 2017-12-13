@@ -1,0 +1,38 @@
+{
+  "name": "templaid",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Declarative filesystem based template rendering",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "prepare": "tsc",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "files": ["lib"],
+  "jest": {
+    "moduleFileExtensions": ["ts", "js"],
+    "transform": {
+      "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": ["**/test/*.(ts|js)"]
+  },
+  "dependencies": {
+    "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "lodash": "^4.17.4",
+    "handlebars": "^4.0.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.5",
+    "@types/handlebars": "^4.0.36",
+    "@types/fs-extra": "^4.0.5",
+    "@types/glob": "^5.0.33",
+    "@types/lodash": "^4.14.85",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.1.4",
+    "typescript": "^2.6.1"
+  }
+}
