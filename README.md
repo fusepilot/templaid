@@ -2,6 +2,12 @@
 
 Declarative filesystem based template rendering with [handlebars.js](https://github.com/wycats/handlebars.js).
 
+### Install
+
+```sh
+yarn add templaid
+```
+
 ## Example
 
 Given the following template folder hierarchy:
