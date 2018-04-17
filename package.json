@@ -12,20 +12,14 @@
     "build": "tsc",
     "test": "jest"
   },
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
+    "watchPathIgnorePatterns": ["lib"],
+    "moduleFileExtensions": ["ts", "js"],
     "transform": {
       "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "testMatch": [
-      "**/test/*.(ts|js)"
-    ]
+    "testMatch": ["**/test/*.(ts|js)"]
   },
   "dependencies": {
     "fs-extra": "^4.0.2",

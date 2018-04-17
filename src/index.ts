@@ -1,5 +1,5 @@
-import * as fs from 'fs-extra'
-import * as path from 'path'
+import * as fs from "fs-extra";
+import * as path from "path";
 import {
   search,
   renderTemplateFile,
@@ -7,11 +7,11 @@ import {
   getTemplatedFilePath,
   getRenderedPath,
   measureTime
-} from './utils'
+} from "./utils";
 
 async function validateTemplatePath(templatePath: string) {
   if (!await fs.pathExists(templatePath))
-    throw Error(`template ${templatePath} does not exist.`)
+    throw Error(`template ${templatePath} does not exist.`);
 }
 
 export function getDestinationFilePath(
@@ -20,8 +20,8 @@ export function getDestinationFilePath(
   file: string,
   data: any
 ) {
-  const renderedPath = getRenderedPath(file, templatePath, destinationPath)
-  return getTemplatedFilePath(renderedPath, data)
+  const renderedPath = getRenderedPath(file, templatePath, destinationPath);
+  return getTemplatedFilePath(renderedPath, data);
 }
 
 export async function createTemplate(
@@ -30,17 +30,17 @@ export async function createTemplate(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
-  const template = await renderTemplateFile(templatePath, templateFile, data)
+  const template = await renderTemplateFile(templatePath, templateFile, data);
 
   let newPath = getDestinationFilePath(
     templatePath,
     destinationPath,
     template.fullPath,
     data
-  )
-  await fs.writeFile(newPath, template.content)
+  );
+  await fs.writeFile(newPath, template.content);
 }
 
 export async function renderTemplates(
@@ -49,14 +49,14 @@ export async function renderTemplates(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
   const templateFiles = await search(
     path.join(templatePath, templateFilesPattern)
-  )
+  );
 
   for (const templateFile of templateFiles) {
-    await createTemplate(templatePath, templateFile, destinationPath, data)
+    await createTemplate(templatePath, templateFile, destinationPath, data);
   }
 }
 
@@ -66,11 +66,11 @@ export async function renderRegularFiles(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
   const files = await search(path.join(templatePath, regularFilesPattern), {
     nodir: true
-  })
+  });
 
   for (const file of files) {
     let newPath = getDestinationFilePath(
@@ -78,9 +78,9 @@ export async function renderRegularFiles(
       destinationPath,
       file,
       data
-    )
+    );
 
-    await fs.copy(file, newPath)
+    await fs.copy(file, newPath);
   }
 }
 
@@ -90,9 +90,9 @@ export async function renderFolders(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
-  const folders = await search(path.join(templatePath, templateFoldersPattern))
+  const folders = await search(path.join(templatePath, templateFoldersPattern));
   // const folders = await search(templateFoldersPattern, {
   //   ignore: patterns.projectTemplatePartialFiles
   // })
@@ -103,9 +103,9 @@ export async function renderFolders(
       destinationPath,
       folder,
       data
-    )
+    );
 
-    await fs.ensureDir(newPath)
+    await fs.ensureDir(newPath);
   }
 }
 
@@ -115,15 +115,15 @@ export async function renderMacros(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
   const macroPaths = await search(
     path.join(templatePath, templateMacroFilesPattern)
-  )
+  );
 
   for (const macroPath of macroPaths) {
     //TODO handle if macro is missing or malformed
-    const macro = require(path.resolve(macroPath)).default
+    const macro = require(path.resolve(macroPath)).default;
 
     await macro({
       data,
@@ -132,7 +132,7 @@ export async function renderMacros(
       renderTemplateFile,
       renderTemplateString,
       getTemplatedFilePath
-    })
+    });
   }
 }
 
@@ -143,9 +143,9 @@ export async function renderPartials(
   destinationPath: string,
   data: any
 ) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
-  const partialPaths = await search(path.join(templatePath, partialPattern))
+  const partialPaths = await search(path.join(templatePath, partialPattern));
 
   for (const partialPath of partialPaths) {
     let newPath = getDestinationFilePath(
@@ -153,12 +153,12 @@ export async function renderPartials(
       destinationPath,
       partialPath,
       data
-    ).replace('.partial', '')
+    ).replace(".partial", "");
 
-    const partialName = path.basename(newPath)
-    const partialTemplatePath = path.join(partialsPath, partialName)
+    const partialName = path.basename(newPath);
+    const partialTemplatePath = path.join(partialsPath, partialName);
 
-    await fs.copy(partialTemplatePath, newPath)
+    await fs.copy(partialTemplatePath, newPath);
   }
 }
 
@@ -166,28 +166,28 @@ export async function renderTemplate({
   templatePath,
   destinationPath,
   data = {},
-  partialsPath = 'partials',
-  templatePattern = '**/*.template',
-  regularPattern = '**/!(*.template|*.template.js|*.partial)',
-  macroPattern = '**/*.template.js',
-  partialPattern = '**/*.partial',
-  folderPattern = '**/'
+  partialsPath = "partials",
+  templatePattern = "**/*.template",
+  regularPattern = "**/!(*.template|*.template.js|*.partial)",
+  macroPattern = "**/*.template.js",
+  partialPattern = "**/*.partial",
+  folderPattern = "**/"
 }: {
-  templatePath: string
-  destinationPath: string
-  data?: any
-  partialsPath?: string
-  templatePattern?: string
-  regularPattern?: string
-  folderPattern?: string
-  partialPattern?: string
-  macroPattern?: string
+  templatePath: string;
+  destinationPath: string;
+  data?: any;
+  partialsPath?: string;
+  templatePattern?: string;
+  regularPattern?: string;
+  folderPattern?: string;
+  partialPattern?: string;
+  macroPattern?: string;
 }) {
-  await validateTemplatePath(templatePath)
+  await validateTemplatePath(templatePath);
 
-  const getMeasuredTime = measureTime()
+  const getMeasuredTime = measureTime();
 
-  await renderFolders(templatePath, folderPattern, destinationPath, data)
+  await renderFolders(templatePath, folderPattern, destinationPath, data);
 
   await Promise.all([
     await renderTemplates(templatePath, templatePattern, destinationPath, data),
@@ -204,11 +204,11 @@ export async function renderTemplate({
       destinationPath,
       data
     )
-  ])
+  ]);
 
-  await renderMacros(templatePath, macroPattern, destinationPath, data)
+  await renderMacros(templatePath, macroPattern, destinationPath, data);
 
-  const createdIn = getMeasuredTime()
+  const createdIn = getMeasuredTime();
 
   // console.log(`"${templatePath}" -> "${destinationPath}" ${createdIn}ms`)
 
@@ -216,5 +216,5 @@ export async function renderTemplate({
     templatePath,
     destinationPath,
     createdIn
-  }
+  };
 }
