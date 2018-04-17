@@ -5,7 +5,7 @@ import * as handlebars from "handlebars";
 
 export const search = (pattern: string, options = {}) => {
   return new Promise((resolve, reject) => {
-    var g = new Glob(pattern, options);
+    var g = new Glob(pattern, { dot: true, ...options });
     g.once("end", resolve);
     g.once("error", reject);
   }) as Promise<string[]>;
