@@ -9,6 +9,7 @@ it("complex", async () => {
   const result = await renderTemplate({
     templatePath: resolve(__dirname, "templates", "complex"),
     destinationPath: outputPath,
+    ignorePattern: "**/.gitkeep",
     data: {
       template: {
         name: "NewProject"

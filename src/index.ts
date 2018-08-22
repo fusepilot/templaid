@@ -10,7 +10,7 @@ import {
 } from "./utils";
 
 async function validateTemplatePath(templatePath: string) {
-  if (!await fs.pathExists(templatePath))
+  if (!(await fs.pathExists(templatePath)))
     throw Error(`template ${templatePath} does not exist.`);
 }
 
@@ -64,12 +64,14 @@ export async function renderRegularFiles(
   templatePath: string,
   regularFilesPattern: string,
   destinationPath: string,
-  data: any
+  data: any,
+  ignorePattern?: string
 ) {
   await validateTemplatePath(templatePath);
 
   const files = await search(path.join(templatePath, regularFilesPattern), {
-    nodir: true
+    nodir: true,
+    ignore: ignorePattern
   });
 
   for (const file of files) {
@@ -88,11 +90,15 @@ export async function renderFolders(
   templatePath: string,
   templateFoldersPattern: string,
   destinationPath: string,
-  data: any
+  data: any,
+  ignorePattern?: string
 ) {
   await validateTemplatePath(templatePath);
 
-  const folders = await search(path.join(templatePath, templateFoldersPattern));
+  const folders = await search(
+    path.join(templatePath, templateFoldersPattern),
+    { ignore: ignorePattern }
+  );
   // const folders = await search(templateFoldersPattern, {
   //   ignore: patterns.projectTemplatePartialFiles
   // })
@@ -171,7 +177,8 @@ export async function renderTemplate({
   regularPattern = "**/!(*.template|*.template.js|*.partial)",
   macroPattern = "**/*.template.js",
   partialPattern = "**/*.partial",
-  folderPattern = "**/"
+  folderPattern = "**/",
+  ignorePattern
 }: {
   templatePath: string;
   destinationPath: string;
@@ -182,12 +189,19 @@ export async function renderTemplate({
   folderPattern?: string;
   partialPattern?: string;
   macroPattern?: string;
+  ignorePattern?: string;
 }) {
   await validateTemplatePath(templatePath);
 
   const getMeasuredTime = measureTime();
 
-  await renderFolders(templatePath, folderPattern, destinationPath, data);
+  await renderFolders(
+    templatePath,
+    folderPattern,
+    destinationPath,
+    data,
+    ignorePattern
+  );
 
   await Promise.all([
     await renderTemplates(templatePath, templatePattern, destinationPath, data),
@@ -195,7 +209,8 @@ export async function renderTemplate({
       templatePath,
       regularPattern,
       destinationPath,
-      data
+      data,
+      ignorePattern
     ),
     await renderPartials(
       templatePath,

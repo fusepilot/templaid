@@ -78,6 +78,12 @@ Object {
       "name": "folder-b",
       "path": "folder-b",
     },
+    Object {
+      "children": Array [],
+      "kind": "directory",
+      "name": "folder-c",
+      "path": "folder-c",
+    },
   ],
   "kind": "directory",
   "name": "output-complex",
