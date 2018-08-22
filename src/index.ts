@@ -14,7 +14,7 @@ async function validateTemplatePath(templatePath: string) {
     throw Error(`template ${templatePath} does not exist.`);
 }
 
-interface GetDestinationFilePathProps {
+export interface GetDestinationFilePathProps {
   templatePath: string;
   destinationPath: string;
   file: string;
@@ -31,7 +31,7 @@ export function getDestinationFilePath({
   return getTemplatedFilePath(renderedPath, data);
 }
 
-interface CreateTemplateProps {
+export interface CreateTemplateProps {
   templatePath: string;
   templateFile: string;
   destinationPath: string;
@@ -57,7 +57,7 @@ export async function createTemplate({
   await fs.writeFile(newPath, template.content);
 }
 
-interface RenderTemplatesProps {
+export interface RenderTemplatesProps {
   templatePath: string;
   templatePattern: string;
   destinationPath: string;
@@ -79,7 +79,7 @@ export async function renderTemplates({
   }
 }
 
-interface RenderRegularFilesProps {
+export interface RenderRegularFilesProps {
   templatePath: string;
   regularPattern: string;
   destinationPath: string;
@@ -113,7 +113,7 @@ export async function renderRegularFiles({
   }
 }
 
-interface RenderFoldersProps {
+export interface RenderFoldersProps {
   templatePath: string;
   folderPattern: string;
   destinationPath: string;
@@ -149,7 +149,7 @@ export async function renderFolders({
   }
 }
 
-interface RenderMacrosProps {
+export interface RenderMacrosProps {
   templatePath: string;
   macroPattern: string;
   destinationPath: string;
@@ -181,7 +181,7 @@ export async function renderMacros({
   }
 }
 
-interface RenderPartialsProps {
+export interface RenderPartialsProps {
   templatePath: string;
   partialPattern: string;
   partialsPath: string;
@@ -215,7 +215,7 @@ export async function renderPartials({
   }
 }
 
-interface RenderTemplateProps {
+export interface RenderTemplateProps {
   templatePath: string;
   destinationPath: string;
   data?: any;
