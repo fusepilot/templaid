@@ -39,6 +39,13 @@ Object {
         Object {
           "content": "",
           "kind": "file",
+          "name": ".hidden.json",
+          "path": "folder-b/.hidden.json",
+          "size": 0,
+        },
+        Object {
+          "content": "",
+          "kind": "file",
           "name": "NewProject-folder-c",
           "path": "folder-b/NewProject-folder-c",
           "size": 0,

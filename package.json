@@ -1,6 +1,6 @@
 {
   "name": "templaid",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "Declarative filesystem based template rendering",
   "repository": "https://github.com/fusepilot/templaid",
@@ -16,6 +16,9 @@
     "lib"
   ],
   "jest": {
+    "watchPathIgnorePatterns": [
+      "lib"
+    ],
     "moduleFileExtensions": [
       "ts",
       "js"
@@ -30,14 +33,14 @@
   "dependencies": {
     "fs-extra": "^4.0.2",
     "glob": "^7.1.2",
-    "lodash": "^4.17.4",
-    "handlebars": "^4.0.11"
+    "handlebars": "^4.0.11",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "@types/jest": "^21.1.5",
-    "@types/handlebars": "^4.0.36",
     "@types/fs-extra": "^4.0.5",
     "@types/glob": "^5.0.33",
+    "@types/handlebars": "^4.0.36",
+    "@types/jest": "^21.1.5",
     "@types/lodash": "^4.14.85",
     "jest": "^21.2.1",
     "ts-jest": "^21.1.4",
