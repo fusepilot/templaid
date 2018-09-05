@@ -26,15 +26,15 @@ Will render the following hierarchy:
 
 ```
 path/to/destination
-└─ ProjectName
-   ├─ ProjectName.md
+└─ MyProjectName
+   ├─ MyProjectName.md
    ├─ file001.txt
    └─ assets
-      ├─ ProjectName.ae
-      └─ ProjectName.psd
+      ├─ MyProjectName.ae
+      └─ MyProjectName.psd
 ```
 
-The code:
+With this code:
 
 ```js
 renderTemplate({
@@ -42,7 +42,7 @@ renderTemplate({
   destinationPath: 'path/to/destination',
   data: {
     project: {
-      name: 'NewProject'
+      name: 'MyProjectName'
     }
   }
 })
@@ -63,13 +63,13 @@ With the data:
 
 ```json
 {
-  "name": "MyProject",
+  "name": "MyProjectName",
   "version": "1.0.0",
   "description": "A description of the project."
 }
 ```
 
-Will create a file named `MyProjectReadme.md` with its contents being:
+Will create a file named `MyProjectNameReadme.md` with its contents being:
 
 ```markdown
 ### MyProject : 1.0.0
