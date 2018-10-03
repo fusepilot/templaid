@@ -1,6 +1,6 @@
 {
   "name": "templaid",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "description": "Declarative filesystem based template rendering",
   "repository": "https://github.com/fusepilot/templaid",
