@@ -10,40 +10,29 @@
     "start": "tsc -w",
     "prepare": "tsc",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "files": [
     "lib"
   ],
-  "jest": {
-    "watchPathIgnorePatterns": [
-      "lib"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "transform": {
-      "\\.ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testMatch": [
-      "**/test/*.(ts|js)"
-    ]
-  },
   "dependencies": {
     "fs-extra": "^4.0.2",
     "glob": "^7.1.2",
     "handlebars": "^4.0.11",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/fs-extra": "^4.0.5",
     "@types/glob": "^5.0.33",
     "@types/handlebars": "^4.0.36",
-    "@types/jest": "^21.1.5",
+    "@types/jest": "^23.3.2",
     "@types/lodash": "^4.14.85",
-    "jest": "^21.2.1",
-    "ts-jest": "^21.1.4",
-    "typescript": "^2.6.1"
+    "jest": "^23.6.0",
+    "jest-plugin-fs": "^2.9.0",
+    "prettier": "^1.14.3",
+    "ts-jest": "^23.10.1",
+    "typescript": "^3.1.1"
   }
 }

@@ -5,7 +5,6 @@ export interface IFile {
   kind: "file";
   name: string;
   path: string;
-  size: number;
   content: string;
 }
 
@@ -40,7 +39,6 @@ const recurse = async ({
       name,
       path: relative(root, path),
       kind: "file",
-      size: stat.size,
       content
     };
   } else if (stat.isDirectory()) {

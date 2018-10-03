@@ -1,14 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es6",
     "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
     "declaration": true,
-    "outDir": "./lib",
-    "lib": ["es2015"],
+    "importHelpers": true,
+    "jsx": "react",
+    "alwaysStrict": true,
     "sourceMap": true,
-    "strict": true,
-    "moduleResolution": "node"
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "outDir": "lib",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/**/*.spec.*"]
+  "include": ["src/**/*"]
 }
