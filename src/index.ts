@@ -234,8 +234,8 @@ export async function renderTemplate({
   data = {},
   partialsPath = "partials",
   templatePattern = "**/*.template",
-  regularPattern = "**/!(*.template|*.template.js|*.partial)",
-  macroPattern = "**/*.template.js",
+  regularPattern = "**/!(*.template|*.macro.js|*.partial)",
+  macroPattern = "**/*.macro.js",
   partialPattern = "**/*.partial",
   folderPattern = "**/",
   ignorePattern
