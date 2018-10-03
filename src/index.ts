@@ -9,7 +9,7 @@ import {
   measureTime
 } from "./utils";
 
-async function validateTemplatePath(templatePath: string) {
+async function throwIfTemplatePathDoesntExist(templatePath: string) {
   if (!(await fs.pathExists(templatePath)))
     throw Error(`template ${templatePath} does not exist.`);
 }
@@ -44,7 +44,7 @@ export async function createTemplate({
   destinationPath,
   data
 }: CreateTemplateProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const template = await renderTemplateFile(templatePath, templateFile, data);
 
@@ -70,7 +70,7 @@ export async function renderTemplates({
   destinationPath,
   data
 }: RenderTemplatesProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const templateFiles = await search(path.join(templatePath, templatePattern));
 
@@ -94,7 +94,7 @@ export async function renderRegularFiles({
   data,
   ignorePattern
 }: RenderRegularFilesProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const files = await search(path.join(templatePath, regularPattern), {
     nodir: true,
@@ -128,7 +128,7 @@ export async function renderFolders({
   data,
   ignorePattern
 }: RenderFoldersProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const folders = await search(path.join(templatePath, folderPattern), {
     ignore: ignorePattern
@@ -162,7 +162,7 @@ export async function renderMacros({
   destinationPath,
   data
 }: RenderMacrosProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const macroPaths = await search(path.join(templatePath, macroPattern));
 
@@ -196,7 +196,7 @@ export async function renderPartials({
   destinationPath,
   data
 }: RenderPartialsProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const partialPaths = await search(path.join(templatePath, partialPattern));
 
@@ -240,7 +240,7 @@ export async function renderTemplate({
   folderPattern = "**/",
   ignorePattern
 }: RenderTemplateProps) {
-  await validateTemplatePath(templatePath);
+  await throwIfTemplatePathDoesntExist(templatePath);
 
   const getMeasuredTime = measureTime();
 
