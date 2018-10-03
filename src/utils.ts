@@ -41,7 +41,12 @@ export async function renderTemplateFile(
 export function getTemplatedFilePath(filePath: string, data: any) {
   const templateMatch = filePath.match(/{{[^}]*}}/);
   if (templateMatch) {
-    return renderTemplateString(filePath, data);
+    const normalizedFilePath = filePath.split(path.sep).join(path.posix.sep);
+    const renderedFilePath = renderTemplateString(normalizedFilePath, data);
+    const denormalizedFilePath = renderedFilePath
+      .split(path.posix.sep)
+      .join(path.sep);
+    return denormalizedFilePath;
   }
   return filePath;
 }
