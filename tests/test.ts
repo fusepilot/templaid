@@ -1,4 +1,4 @@
-import { renderTemplate } from "../src";
+import { renderTemplate, getDestinationFilePath } from "../src";
 import { remove } from "fs-extra";
 import jestFs from "jest-plugin-fs";
 
@@ -58,4 +58,21 @@ Object {
   "/output/simple/file.md": "file content",
 }
 `);
+});
+
+it("can get destination file path", async () => {
+  const result = getDestinationFilePath({
+    templatePath: "/templates/complex",
+    destinationPath: "/output/complex",
+    file: "{{template.name}}/{{template.name}}-a.md",
+    data: {
+      template: {
+        name: "NewProject"
+      }
+    }
+  });
+
+  expect(result).toMatchInlineSnapshot(
+    `"/Users/michael/Workspace/templaid/NewProject/NewProject-a.md"`
+  );
 });
